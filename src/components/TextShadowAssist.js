@@ -12,10 +12,13 @@ constructor(props) {
     fontWeight: "",
     fontSize: 50,
     shadowLength: 0,
-    shadowColor: "blue",
-    shadowValues: "1px 1px 0px",
+    shadowColor: "#e34234",
+    shadowValues: 0,
     backgroundColor: "#fff",
   }
+
+this.renderShadows = this.renderShadows.bind(this);
+
 }
 
 updateWord(e) {
@@ -36,33 +39,33 @@ boldFont(e) {
   })
 };
 
-updateShadowLength(e) {
-
-function generateValues(length){
-    const result = [];
-    for(var i=1; i <= length; i++) {
-      result.push(i + "px " + i + "px 0px " + this.state.shadowColor);
-    }
-    return result.join(',')
-  };
-
-
-  this.setState({
-    shadowLength: e.target.value}, () => {
-    this.setState({
-    shadowValues: generateValues(this.state.shadowLength)
-  });
-
-  });
+renderShadows() {
+        const result = [];
+        for(var i=1; i <= this.state.shadowLength; i++) {
+          result.push(i + "px " + i + `px 0px ${this.state.shadowColor}`);
+        }
+        return this.setState({shadowValues: result.join(', ')})
 }
+
+
+
+updateshadowLength(e) {
+  this.setState({
+    shadowLength: parseInt(e.target.value, 10) ? parseInt(e.target.value, 10) : 0
+  }, () => {
+    this.renderShadows()
+  })
+}
+
+// Need to split into one function to render, one to update.
 
 
     render() {
 // Styles
 const mainStyle = {
   width: "100%",
-  height: "400px",
-  border: "1px solid #f5f5f5",
+  height: "300px",
+  border: "2px solid #f5f5f5",
   overflow: "hidden",
   background: this.state.backgroundColor
 }
@@ -71,7 +74,8 @@ const wordStyle = {
   fontSize: `${this.state.fontSize}px`,
   textAlign: "center",
   color: this.state.color,
-  marginTop: "120px",
+  textShadow: this.state.shadowValues,
+  marginTop: "50px",
   fontWeight: this.state.fontWeight
 }
 const wordInputStyle = {
@@ -91,13 +95,15 @@ const numberInputStyle = {
   marginBottom: "5px"
 }
 
+
 // need ShadowLength and Shadow Color;
-console.log(this.state);
+
+
       return (
       <div className="container">
       <h1 style={{fontWeight: "900"}}>Text Shadow Assistant</h1>
 
-      <div className="main" style={mainStyle}>
+      <div style={mainStyle}>
       <h1 className="word"
       style={wordStyle}>{this.state.enteredWord}</h1>
 
@@ -108,8 +114,11 @@ console.log(this.state);
       <input value={this.state.enteredWord}
       style={wordInputStyle}
       onChange={this.updateWord.bind(this)}/>
-      <button
+      <button className="btn"
       onClick={this.boldFont.bind(this)}>Bold</button>
+<div className="text-center">
+      <button className="btn">Copy Text Shadow Values to Clipboard</button>
+</div>
 </div>
 <div className="row">
       <div className="col-xs-12 col-lg-3 font-sizing-controls">
@@ -131,14 +140,19 @@ console.log(this.state);
       <input
       style={numberInputStyle}
       value={this.state.shadowLength}
-      onChange={this.updateShadowLength.bind(this)} />
+      onChange={this.updateshadowLength.bind(this)}/>
       <div>
       <button className="btn" style={{margin: "2px"}}
-      onClick={()=> {this.setState({shadowLength: this.state.shadowLength + 1})}}>+</button>
+      onClick={()=> {this.setState({shadowLength: this.state.shadowLength + 1}, () => {
+        this.renderShadows()
+      })}}>+</button>
       <button className="btn" style={{margin: "2px"}}
-      onClick={()=> {this.setState({shadowLength: this.state.shadowLength - 1})}}>-</button>
+      onClick={()=> {this.setState({shadowLength: this.state.shadowLength - 1}, () => {
+        this.renderShadows()
+      })}}>-</button>
       </div>
       </div>
+
       </div>
       </div>
       </div>
