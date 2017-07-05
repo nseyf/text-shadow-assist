@@ -93,7 +93,7 @@ const mainStyle = {
   width: "100%",
   minheight: "350px",
   border: "2px solid #f5f5f5",
-  overflow: "hidden",
+  overflow: "scroll",
   marginTop: "50px",
   boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   background: this.state.backgroundColor
@@ -118,6 +118,7 @@ height: "100px",
 color: "grey",
 fontSize: "20px",
 fontWeight: "100",
+overflow: "scroll",
 textAlign: "center"
 }
 
@@ -172,6 +173,7 @@ onClick={this.resetFontWeight.bind(this)}>Reset Font Weight</button>
       <div className="col-xs-12 col-md-6 col-lg-6 font-sizing-controls">
       <h4>Font Size </h4>
       <input placeholder={this.state.fontSize}
+      value={this.state.fontSize}
       style={numberInputStyle}
       onChange={this.updateFontSize.bind(this)}/>
 
@@ -187,6 +189,7 @@ onClick={this.resetFontWeight.bind(this)}>Reset Font Weight</button>
       <h4>Shadow Length</h4>
       <input
       style={numberInputStyle}
+      value={this.state.shadowLength}
       placeholder={this.state.shadowLength}
       onChange={this.updateshadowLength.bind(this)}/>
       <div>
