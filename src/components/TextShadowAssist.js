@@ -10,9 +10,10 @@ constructor(props) {
     color: "#151515",
     font: "",
     fontWeight: "",
+    fontFamily: "helvetica",
     fontSize: 50,
     shadowLength: 0,
-    shadowColor: "#e34234",
+    shadowColor: "pink",
     shadowValues: 0,
     backgroundColor: "#fff",
   }
@@ -27,6 +28,22 @@ updateWord(e) {
   })
 };
 
+updateTextColor(e) {
+  this.setState({
+    color: e.target.value
+  })
+}
+
+updateTextShadowColor(e) {
+  this.setState({
+    shadowColor: e.target.value
+  }, () => {
+    this.renderShadows();
+  })
+}
+
+
+
 updateFontSize(e) {
   this.setState({
     fontSize: parseInt(e.target.value, 10) ? parseInt(e.target.value, 10) : 0
@@ -39,6 +56,12 @@ boldFont(e) {
   })
 };
 
+resetFontWeight(e){
+  this.setState({
+    fontWeight: "300"
+  })
+};
+
 renderShadows() {
         const result = [];
         for(var i=1; i <= this.state.shadowLength; i++) {
@@ -47,7 +70,11 @@ renderShadows() {
         return this.setState({shadowValues: result.join(', ')})
 }
 
-
+updateBackground(e){
+  this.setState({
+    backgroundColor: e.target.value
+  })
+}
 
 updateshadowLength(e) {
   this.setState({
@@ -64,27 +91,33 @@ updateshadowLength(e) {
 // Styles
 const mainStyle = {
   width: "100%",
-  height: "300px",
+  minheight: "350px",
   border: "2px solid #f5f5f5",
   overflow: "hidden",
+  marginTop: "50px",
+  boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   background: this.state.backgroundColor
 }
 
 const wordStyle = {
+  padding: "20px",
+  fontFamily: this.state.fontFamily,
   fontSize: `${this.state.fontSize}px`,
   textAlign: "center",
   color: this.state.color,
   textShadow: this.state.shadowValues,
-  marginTop: "50px",
-  fontWeight: this.state.fontWeight
+  fontWeight: this.state.fontWeight,
+  marginBottom: "30px"
 }
+
 const wordInputStyle = {
 marginTop: "50px",
 marginBottom: "50px",
 width: "70%",
 height: "100px",
-fontSize: "30px",
 color: "grey",
+fontSize: "20px",
+fontWeight: "100",
 textAlign: "center"
 }
 
@@ -111,19 +144,34 @@ const numberInputStyle = {
 
       <div className="inputs text-center">
 <div className="row">
-      <input value={this.state.enteredWord}
+      <input
+      placeholder={this.state.enteredWord}
       style={wordInputStyle}
       onChange={this.updateWord.bind(this)}/>
-      <button className="btn"
-      onClick={this.boldFont.bind(this)}>Bold</button>
 <div className="text-center">
+<button className="btn"
+onClick={this.boldFont.bind(this)}>Bold Text</button>
+<button className="btn"
+onClick={this.resetFontWeight.bind(this)}>Reset Font Weight</button>
       <button className="btn">Copy Text Shadow Values to Clipboard</button>
+</div>
+<div className="row">
+<div className="col-lg-4 col-xs-12"><label>Text Color: </label>
+<input placeholder={this.state.color} onChange={this.updateTextColor.bind(this)} />
+</div>
+<div className="col-lg-4 col-xs-12"><label>Text Shadow Color: </label>
+<input placeholder={this.state.shadowColor} onChange={this.updateTextShadowColor.bind(this)} />
+</div>
+<div className="col-lg-4 col-xs-12">
+<label>Background Color: </label>
+<input placeholder={this.state.backgroundColor} onChange={this.updateBackground.bind(this)} />
+</div>
 </div>
 </div>
 <div className="row">
-      <div className="col-xs-12 col-lg-3 font-sizing-controls">
+      <div className="col-xs-12 col-md-6 col-lg-6 font-sizing-controls">
       <h4>Font Size </h4>
-      <input value={this.state.fontSize}
+      <input placeholder={this.state.fontSize}
       style={numberInputStyle}
       onChange={this.updateFontSize.bind(this)}/>
 
@@ -135,11 +183,11 @@ const numberInputStyle = {
       </div>
 
       </div>
-      <div className="col-xs-12 col-lg-3">
+      <div className="col-xs-12 col-md-6 col-lg-6">
       <h4>Shadow Length</h4>
       <input
       style={numberInputStyle}
-      value={this.state.shadowLength}
+      placeholder={this.state.shadowLength}
       onChange={this.updateshadowLength.bind(this)}/>
       <div>
       <button className="btn" style={{margin: "2px"}}
