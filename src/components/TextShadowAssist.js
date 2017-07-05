@@ -26,7 +26,7 @@ updateWord(e) {
 
 updateFontSize(e) {
   this.setState({
-    fontSize: parseInt(e.target.value) ? parseInt(e.target.value) : 10
+    fontSize: parseInt(e.target.value, 10) ? parseInt(e.target.value, 10) : 0
   })
 }
 
@@ -91,12 +91,12 @@ textAlign: "center"
       <button className="btn" style={{margin: "2px"}} onClick={()=> {this.setState({fontSize: this.state.fontSize -= 1})}}>-</button>
       </div>
 
-      </div> //Sizing Controls
+      </div>
 
       </div>
-      // Input Controls
+
       </div>
-      // Container End
+
     )
   }
 }
