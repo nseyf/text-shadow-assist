@@ -15,7 +15,7 @@ constructor(props) {
     shadowLength: 0,
     shadowColor: "pink",
     shadowValues: 0,
-    backgroundColor: "#fff",
+    backgroundColor: "",
   }
 
 this.renderShadows = this.renderShadows.bind(this);
@@ -93,7 +93,7 @@ const mainStyle = {
   width: "100%",
   minheight: "350px",
   border: "2px solid #f5f5f5",
-  overflow: "scroll",
+  overflow: "hidden",
   marginTop: "50px",
   boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   background: this.state.backgroundColor
@@ -175,7 +175,9 @@ onClick={this.resetFontWeight.bind(this)}>Reset Font Weight</button>
       <input placeholder={this.state.fontSize}
       value={this.state.fontSize}
       style={numberInputStyle}
-      onChange={this.updateFontSize.bind(this)}/>
+      onChange={this.updateFontSize.bind(this)}
+      onClick={() => {this.setState({fontSize: 0})}}
+      />
 
       <div>
       <button className="btn" style={{margin: "2px"}}
@@ -191,7 +193,9 @@ onClick={this.resetFontWeight.bind(this)}>Reset Font Weight</button>
       style={numberInputStyle}
       value={this.state.shadowLength}
       placeholder={this.state.shadowLength}
-      onChange={this.updateshadowLength.bind(this)}/>
+      onChange={this.updateshadowLength.bind(this)}
+      onClick={() => {this.setState({shadowLength: 0})}}
+      />
       <div>
       <button className="btn" style={{margin: "2px"}}
       onClick={()=> {this.setState({shadowLength: this.state.shadowLength + 1}, () => {
