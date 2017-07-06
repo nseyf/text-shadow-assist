@@ -42,6 +42,20 @@ updateTextShadowColor(e) {
   })
 }
 
+copyValues(e) {
+
+    const element = document.createElement('textarea');
+    element.value = `text-shadow: ${e.target.value}`;
+
+    document.body.appendChild(element);
+
+    element.focus();
+    element.setSelectionRange(0, element.value.length);
+
+    document.execCommand('copy');
+    document.body.removeChild(element)
+  }
+
 
 
 updateFontSize(e) {
@@ -50,13 +64,19 @@ updateFontSize(e) {
   })
 }
 
-boldFont(e) {
+boldFontWeight(e) {
   this.setState({
     fontWeight: "bold"
   })
 };
 
-resetFontWeight(e){
+normalFontWeight(e) {
+  this.setState({
+    fontWeight: "500"
+  })
+}
+
+thinFontWeight(e){
   this.setState({
     fontWeight: "300"
   })
@@ -93,6 +113,7 @@ const mainStyle = {
   width: "100%",
   minheight: "350px",
   border: "2px solid #f5f5f5",
+  transition: "0.3s",
   overflow: "hidden",
   marginTop: "50px",
   boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
@@ -104,6 +125,7 @@ const wordStyle = {
   fontFamily: this.state.fontFamily,
   fontSize: `${this.state.fontSize}px`,
   textAlign: "center",
+  transition: "0.3s",
   color: this.state.color,
   textShadow: this.state.shadowValues,
   fontWeight: this.state.fontWeight,
@@ -140,9 +162,7 @@ const numberInputStyle = {
       <div style={mainStyle}>
       <h1 className="word"
       style={wordStyle}>{this.state.enteredWord}</h1>
-
       </div>
-
       <div className="inputs text-center">
 <div className="row">
       <input
@@ -151,21 +171,39 @@ const numberInputStyle = {
       onChange={this.updateWord.bind(this)}/>
 <div className="text-center">
 <button className="btn"
-onClick={this.boldFont.bind(this)}>Bold Text</button>
+onClick={this.boldFontWeight.bind(this)}>Bold Font Weight</button>
 <button className="btn"
-onClick={this.resetFontWeight.bind(this)}>Reset Font Weight</button>
-      <button className="btn">Copy Text Shadow Values to Clipboard</button>
+onClick={this.thinFontWeight.bind(this)}>Thin Font Weight</button>
+<button className="btn"
+onClick={this.normalFontWeight.bind(this)}>Reset Font Weight</button>
+
+      <button value={this.state.shadowValues} onClick={this.copyValues.bind(this)} className="btn">Copy Text Shadow Values to Clipboard</button>
 </div>
 <div className="row">
 <div className="col-lg-4 col-xs-12"><label>Text Color: </label>
-<input placeholder={this.state.color} onChange={this.updateTextColor.bind(this)} />
+<input
+placeholder={this.state.color}
+onChange={this.updateTextColor.bind(this)}
+value={this.state.color}
+onClick={() => {this.setState({color: ""})}}
+/>
 </div>
 <div className="col-lg-4 col-xs-12"><label>Text Shadow Color: </label>
-<input placeholder={this.state.shadowColor} onChange={this.updateTextShadowColor.bind(this)} />
+<input
+placeholder={this.state.shadowColor}
+onChange={this.updateTextShadowColor.bind(this)}
+value={this.state.shadowColor}
+onClick={() => {this.setState({shadowColor: ""})}}
+/>
 </div>
 <div className="col-lg-4 col-xs-12">
 <label>Background Color: </label>
-<input placeholder={this.state.backgroundColor} onChange={this.updateBackground.bind(this)} />
+<input
+placeholder={this.state.backgroundColor}
+onChange={this.updateBackground.bind(this)}
+value={this.state.backgroundColor}
+onClick={() => {this.setState({backgroundColor: ""})}}
+/>
 </div>
 </div>
 </div>
