@@ -104,9 +104,6 @@ updateshadowLength(e) {
   })
 }
 
-// Need to split into one function to render, one to update.
-
-
     render() {
 // Styles
 const mainStyle = {
@@ -152,8 +149,7 @@ const numberInputStyle = {
 }
 
 
-// need ShadowLength and Shadow Color;
-
+//
 
       return (
       <div className="container">

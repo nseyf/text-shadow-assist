@@ -3,6 +3,8 @@
   color: white;
   margin: 3px;
   border-radius: none;
+  font-size: 15px;
+  letter-spacing: 2px;
 }
 
 .row {
