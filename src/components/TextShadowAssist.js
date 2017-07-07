@@ -15,7 +15,7 @@ constructor(props) {
     shadowLength: 0,
     shadowColor: "pink",
     shadowValues: 0,
-    backgroundColor: "",
+    backgroundColor: "white",
   }
 
 this.renderShadows = this.renderShadows.bind(this);
@@ -116,7 +116,7 @@ const mainStyle = {
   border: "2px solid #f5f5f5",
   transition: "0.3s",
   overflow: "hidden",
-  marginTop: "20npm start0px",
+  marginTop: "50px",
   boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   background: this.state.backgroundColor
 }
