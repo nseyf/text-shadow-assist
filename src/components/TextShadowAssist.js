@@ -116,8 +116,8 @@ copyValues(e) {
 
     const element = document.createElement('textarea');
 
-    element.value = `text-shadow: ${e.target.value}`;
-
+    element.value = `${e}`
+console.log(JSON.stringify(e.target.value))
     document.body.appendChild(element);
 
     element.focus();
@@ -161,7 +161,7 @@ const wordStyle = {
 
 const wordInputStyle = {
 marginTop: "50px",
-marginBottom: "50px",
+marginBottom: "25px",
 width: "70%",
 height: "100px",
 color: "grey",
@@ -170,6 +170,8 @@ fontWeight: "100",
 overflow: "scroll",
 textAlign: "center"
 }
+
+
 
 const numberInputStyle = {
   fontSize:"40px",
@@ -206,6 +208,42 @@ const cover = {
       placeholder={this.state.enteredWord}
       style={wordInputStyle}
       onChange={this.updateWord.bind(this)}/>
+      <div className="row">
+      <div className="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+
+      <button className="btn" onClick={() => {this.setState({displayColorPicker: !this.state.displayColorPicker })}}>Text Color</button>
+      { this.state.displayColorPicker ? <div style={ popover }>
+      <div style={ cover } onClick={ () => { this.setState({displayColorPicker: false})} } />
+      <SketchPicker
+      color={ this.state.color }
+      onChange={this.updateTextColor.bind(this)}
+      />
+      </div> : null }
+
+      </div>
+      <div className="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+      <button className="btn" onClick={() => {this.setState({displayShadowPicker: !this.state.displayShadowPicker })}}>Shadow Color</button>
+      { this.state.displayShadowPicker ? <div style={ popover }>
+      <div style={ cover } onClick={ () => { this.setState({displayShadowPicker: false})} } />
+      <SketchPicker
+      color={ this.state.shadowColor }
+      onChange={this.updateTextShadowColor.bind(this)}
+      />
+      </div> : null }
+      </div>
+      <div className="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+
+      <button className="btn" onClick={() => {this.setState({displayBackgroundPicker: !this.state.displayBackgroundPicker })}}>Background Color</button>
+      { this.state.displayBackgroundPicker ? <div style={ popover }>
+      <div style={ cover } onClick={ () => { this.setState({displayBackgroundPicker: false})} } />
+      <SketchPicker
+      color={ this.state.backgroundColor }
+      onChange={this.updateBackgroundColor.bind(this)}
+      />
+      </div> : null }
+
+      </div>
+      </div>
 <div className="text-center">
 <button className="btn"
 onClick={this.toggleItalic.bind(this)}>Italicize(toggle)</button>
@@ -218,42 +256,7 @@ onClick={this.normalFontWeight.bind(this)}>Reset Font Weight</button>
 
       <button value={this.state.shadowValues} onClick={this.copyValues.bind(this)} className="btn">Copy Text Shadow Values to Clipboard</button>
 </div>
-<div className="row">
-<div className="col-lg-4 col-sm-4 col-md-4 col-xs-12">
 
-<button className="btn" onClick={() => {this.setState({displayColorPicker: !this.state.displayColorPicker })}}>Text Color</button>
-{ this.state.displayColorPicker ? <div style={ popover }>
-<div style={ cover } onClick={ () => { this.setState({displayColorPicker: false})} } />
-<SketchPicker
-color={ this.state.color }
-onChange={this.updateTextColor.bind(this)}
-/>
-</div> : null }
-
-</div>
-<div className="col-lg-4 col-sm-4 col-md-4 col-xs-12">
-<button className="btn" onClick={() => {this.setState({displayShadowPicker: !this.state.displayShadowPicker })}}>Shadow Color</button>
-{ this.state.displayShadowPicker ? <div style={ popover }>
-<div style={ cover } onClick={ () => { this.setState({displayShadowPicker: false})} } />
-<SketchPicker
-color={ this.state.shadowColor }
-onChange={this.updateTextShadowColor.bind(this)}
-/>
-</div> : null }
-</div>
-<div className="col-lg-4 col-sm-4 col-md-4 col-xs-12">
-
-<button className="btn" onClick={() => {this.setState({displayBackgroundPicker: !this.state.displayBackgroundPicker })}}>Background Color</button>
-{ this.state.displayBackgroundPicker ? <div style={ popover }>
-<div style={ cover } onClick={ () => { this.setState({displayBackgroundPicker: false})} } />
-<SketchPicker
-color={ this.state.backgroundColor }
-onChange={this.updateBackgroundColor.bind(this)}
-/>
-</div> : null }
-
-</div>
-</div>
 </div>
 <div className="row">
       <div className="col-xs-12 col-md-6 col-lg-6 font-sizing-controls">
@@ -293,6 +296,8 @@ onChange={this.updateBackgroundColor.bind(this)}
       })}}>-</button>
       </div>
       </div>
+
+
 
       </div>
       </div>
