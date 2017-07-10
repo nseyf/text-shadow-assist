@@ -116,8 +116,8 @@ copyValues(e) {
 
     const element = document.createElement('textarea');
 
-    element.value = `${e}`
-console.log(JSON.stringify(e.target.value))
+    element.value = `text-shadow: ${e.target.value}`
+
     document.body.appendChild(element);
 
     element.focus();
