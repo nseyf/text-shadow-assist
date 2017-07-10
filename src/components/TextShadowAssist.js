@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { SketchPicker } from 'react-color';
 
 export default class TextShadowAssist extends Component {
 
@@ -10,17 +11,24 @@ constructor(props) {
     color: "#151515",
     font: "",
     fontWeight: "",
+    isItalic: false,
+    fontStyle: "",
     fontFamily: "helvetica",
     fontSize: 50,
     shadowLength: 0,
-    shadowColor: "pink",
+    shadowColor: "",
     shadowValues: 0,
     backgroundColor: "white",
-  }
+    displayColorPicker: false,
+    displayShadowPicker: false,
+    displayBackgroundPicker: false,
+    }
 
 this.renderShadows = this.renderShadows.bind(this);
 
 }
+
+// Word Input Handler
 
 updateWord(e) {
   this.setState({
@@ -28,42 +36,34 @@ updateWord(e) {
   })
 };
 
+
 updateTextColor(e) {
-  this.setState({
-    color: e.target.value
-  })
+this.setState({
+  color: e.hex
+})
 }
+
 
 updateTextShadowColor(e) {
   this.setState({
-    shadowColor: e.target.value
+    shadowColor: e.hex
   }, () => {
     this.renderShadows();
   })
 }
 
-copyValues(e) {
 
-    const element = document.createElement('textarea');
-
-    element.value = `text-shadow: ${e.target.value}`;
-
-    document.body.appendChild(element);
-
-    element.focus();
-
-    element.setSelectionRange(0, element.value.length);
-
-    document.execCommand('copy');
-    document.body.removeChild(element)
-  }
-
-
-
+// Font sizing handler
 updateFontSize(e) {
   this.setState({
     fontSize: parseInt(e.target.value, 10) ? parseInt(e.target.value, 10) : 0
   })
+}
+
+//Font Styling
+
+toggleItalic(e) {
+  this.state.isItalic ? this.setState({isItalic : false, fontStyle: ""}) : this.setState({isItalic: true, fontStyle: "italic"})
 }
 
 boldFontWeight(e) {
@@ -84,6 +84,8 @@ thinFontWeight(e){
   })
 };
 
+//Rendering Shadows
+
 renderShadows() {
         const result = [];
         for(var i=1; i <= this.state.shadowLength; i++) {
@@ -92,11 +94,13 @@ renderShadows() {
         return this.setState({shadowValues: result.join(', ')})
 }
 
-updateBackground(e){
+
+updateBackgroundColor(e){
   this.setState({
-    backgroundColor: e.target.value
+    backgroundColor: e.hex
   })
 }
+
 
 updateshadowLength(e) {
   this.setState({
@@ -106,9 +110,30 @@ updateshadowLength(e) {
   })
 }
 
-    render() {
-// Styles
+// Copying Shadow values to clipboard
 
+copyValues(e) {
+
+    const element = document.createElement('textarea');
+
+    element.value = `text-shadow: ${e.target.value}`;
+
+    document.body.appendChild(element);
+
+    element.focus();
+
+    element.setSelectionRange(0, element.value.length);
+
+    document.execCommand('copy');
+    document.body.removeChild(element)
+  }
+
+
+
+
+    render() {
+
+// Styles
 
 const mainStyle = {
   width: "100%",
@@ -124,6 +149,7 @@ const mainStyle = {
 const wordStyle = {
   padding: "20px",
   fontFamily: this.state.fontFamily,
+  fontStyle: this.state.fontStyle,
   fontSize: `${this.state.fontSize}px`,
   textAlign: "center",
   transition: "0.3s",
@@ -152,8 +178,21 @@ const numberInputStyle = {
   marginBottom: "5px"
 }
 
+// Color Picker style
 
-//
+const popover = {
+  position: "absolute",
+  zIndex: "3"
+}
+
+const cover = {
+  position: "fixed",
+  top: "0px",
+  right: "0px",
+  bottom: "0px",
+  left: "0px",
+}
+
 
       return (
       <div className="container">
@@ -169,6 +208,8 @@ const numberInputStyle = {
       onChange={this.updateWord.bind(this)}/>
 <div className="text-center">
 <button className="btn"
+onClick={this.toggleItalic.bind(this)}>Italicize(toggle)</button>
+<button className="btn"
 onClick={this.boldFontWeight.bind(this)}>Bold Font Weight</button>
 <button className="btn"
 onClick={this.thinFontWeight.bind(this)}>Thin Font Weight</button>
@@ -178,30 +219,39 @@ onClick={this.normalFontWeight.bind(this)}>Reset Font Weight</button>
       <button value={this.state.shadowValues} onClick={this.copyValues.bind(this)} className="btn">Copy Text Shadow Values to Clipboard</button>
 </div>
 <div className="row">
-<div className="col-lg-4 col-xs-12"><label>Text Color: </label>
-<input
-placeholder={this.state.color}
+<div className="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+
+<button className="btn" onClick={() => {this.setState({displayColorPicker: !this.state.displayColorPicker })}}>Text Color</button>
+{ this.state.displayColorPicker ? <div style={ popover }>
+<div style={ cover } onClick={ () => { this.setState({displayColorPicker: false})} } />
+<SketchPicker
+color={ this.state.color }
 onChange={this.updateTextColor.bind(this)}
-value={this.state.color}
-onClick={() => {this.setState({color: ""})}}
 />
+</div> : null }
+
 </div>
-<div className="col-lg-4 col-xs-12"><label>Text Shadow Color: </label>
-<input
-placeholder={this.state.shadowColor}
+<div className="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+<button className="btn" onClick={() => {this.setState({displayShadowPicker: !this.state.displayShadowPicker })}}>Shadow Color</button>
+{ this.state.displayShadowPicker ? <div style={ popover }>
+<div style={ cover } onClick={ () => { this.setState({displayShadowPicker: false})} } />
+<SketchPicker
+color={ this.state.shadowColor }
 onChange={this.updateTextShadowColor.bind(this)}
-value={this.state.shadowColor}
-onClick={() => {this.setState({shadowColor: ""})}}
 />
+</div> : null }
 </div>
-<div className="col-lg-4 col-xs-12">
-<label>Background Color: </label>
-<input
-placeholder={this.state.backgroundColor}
-onChange={this.updateBackground.bind(this)}
-value={this.state.backgroundColor}
-onClick={() => {this.setState({backgroundColor: ""})}}
+<div className="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+
+<button className="btn" onClick={() => {this.setState({displayBackgroundPicker: !this.state.displayBackgroundPicker })}}>Background Color</button>
+{ this.state.displayBackgroundPicker ? <div style={ popover }>
+<div style={ cover } onClick={ () => { this.setState({displayBackgroundPicker: false})} } />
+<SketchPicker
+color={ this.state.backgroundColor }
+onChange={this.updateBackgroundColor.bind(this)}
 />
+</div> : null }
+
 </div>
 </div>
 </div>

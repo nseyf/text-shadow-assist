@@ -1,15 +1,28 @@
 .btn {
-  background: #e34234;
+  background: #151515;
   color: white;
   margin: 3px;
   border-radius: none;
   font-size: 15px;
   letter-spacing: 2px;
 }
+.btn:hover {
+  background: white;
+  border:1px solid #151515;
+  color: #151515;
+}
+.btn:focus {
+  color: white;
+  background: #151515;
+}
 
 .row {
   margin-bottom: 30px;
   margin-top: 30px;
+}
+
+.picker {
+  text-align: center;
 }
 
 
