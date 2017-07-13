@@ -10,11 +10,12 @@ Built with React, bootstrap and React-color for the color pickers.
 
 Don't forget to install dependencies with:
 
-$ npm install
+ > $ npm install
+ 
 To run:
 
-$ npm run dev
+> $ npm run dev
 
 To build for deployment:
 
-$ npm run build
+> $ npm run build
