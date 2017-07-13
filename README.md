@@ -7,3 +7,14 @@ A user can input the background, text and text-shadow colors and preview them be
 Currently only supports Helvetica.
 
 Built with React, bootstrap and React-color for the color pickers.
+
+Don't forget to install dependencies with:
+
+$ npm install
+To run:
+
+$ npm run dev
+
+To build for deployment:
+
+$ npm run build
