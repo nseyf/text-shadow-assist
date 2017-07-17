@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { SketchPicker } from 'react-color';
 
+
 export default class TextShadowAssist extends Component {
 
 constructor(props) {
@@ -254,7 +255,7 @@ onClick={this.thinFontWeight.bind(this)}>Thin Font Weight</button>
 <button className="btn"
 onClick={this.normalFontWeight.bind(this)}>Reset Font Weight</button>
 
-      <button value={this.state.shadowValues} onClick={this.copyValues.bind(this)} className="btn">Copy Text Shadow Values to Clipboard</button>
+      <button value={this.state.shadowValues} onClick={this.copyValues.bind(this)} className="btn">Copy Shadow Values to Clipboard</button>
 </div>
 
 </div>
@@ -297,11 +298,11 @@ onClick={this.normalFontWeight.bind(this)}>Reset Font Weight</button>
       </div>
       </div>
 
+<a rel="noopener noreferrer" target= "_blank" href="https://github.com/nseyf/text-shadow-assist"><i style={{color: "#151515", padding: "5px", marginTop: "15px"}} className="fa fa-4x fa-github" aria-hidden="true"></i></a>
+      </div>
+      </div>
+      </div>
 
-
-      </div>
-      </div>
-      </div>
 
     )
   }
