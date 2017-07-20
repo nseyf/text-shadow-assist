@@ -6,6 +6,8 @@ A user can input the background, text and text-shadow colors and preview them be
 
 Currently only supports Helvetica.
 
+[View Live](https://nseyf.github.io/text-shadow-assist)
+
 Built with React, bootstrap and React-color for the color pickers.
 
 Don't forget to install dependencies with:
