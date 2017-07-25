@@ -10,12 +10,12 @@ constructor(props) {
   this.state = {
     enteredWord: "The quick brown fox jumps over the lazy dog",
     color: "#151515",
-    font: "",
+    fonts: ["Arial", "Arial Narrow", "Arial Black", "Courier New", "Georgia", "Lucinda Console", "Tahoma", "Times New Roman", "Verdana", "Helvetica"],
     fontWeight: "",
     isItalic: false,
     fontStyle: "",
-    fontFamily: "helvetica",
-    fontSize: 70,
+    fontFamily: "Helvetica",
+    fontSize: 60,
     shadowLength: 10,
     shadowColor: "",
     shadowValues: 0,
@@ -199,6 +199,16 @@ const cover = {
 
       return (
       <div className="container">
+      <div className="text-left" style={{marginTop: "15px"}}>
+
+<div className="dropdown">
+<button className="btn dropbtn">Select Font</button>
+<div className="dropdown-content">
+{this.state.fonts.map(font => <a onClick={()=>{this.setState({fontFamily: font})}}>{font}</a>)}
+</div>
+</div>
+
+      </div>
       <div style={mainStyle}>
       <h1 className="word"
       style={wordStyle}>{this.state.enteredWord}</h1>
@@ -245,6 +255,7 @@ const cover = {
 
       </div>
       </div>
+
 <div className="text-center">
 <button className="btn"
 onClick={this.toggleItalic.bind(this)}>Italicize(toggle)</button>
