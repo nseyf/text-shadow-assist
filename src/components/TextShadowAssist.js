@@ -200,11 +200,10 @@ const cover = {
       return (
       <div className="container">
       <div className="text-left" style={{marginTop: "15px"}}>
-
 <div className="dropdown">
 <button className="btn dropbtn">Select Font</button>
 <div className="dropdown-content">
-{this.state.fonts.map(font => <a onClick={()=>{this.setState({fontFamily: font})}}>{font}</a>)}
+{this.state.fonts.map(font => <a style={{fontFamily: font, cursor: "pointer"}} onClick={()=>{this.setState({fontFamily: font})}}>{font}</a>)}
 </div>
 </div>
 
