@@ -10,7 +10,16 @@ constructor(props) {
   this.state = {
     enteredWord: "The quick brown fox jumps over the lazy dog",
     color: "#151515",
-    fonts: ["Arial", "Arial Narrow", "Arial Black", "Courier New", "Georgia", "Lucinda Console", "Tahoma", "Times New Roman", "Verdana", "Helvetica"],
+    fonts: ["Arial",
+    "Arial Narrow",
+    "Arial Black",
+    "Courier New",
+    "Georgia",
+    "Lucinda Console",
+    "Tahoma",
+    "Times New Roman",
+    "Verdana",
+    "Helvetica"],
     fontWeight: "",
     isItalic: false,
     fontStyle: "",
@@ -64,7 +73,11 @@ updateFontSize(e) {
 //Font Styling
 
 toggleItalic(e) {
-  this.state.isItalic ? this.setState({isItalic : false, fontStyle: ""}) : this.setState({isItalic: true, fontStyle: "italic"})
+  this.state.isItalic ? this.setState({
+    isItalic : false, fontStyle: ""
+  }) : this.setState({
+    isItalic: true, fontStyle: "italic"
+  })
 }
 
 boldFontWeight(e) {
@@ -203,14 +216,24 @@ const cover = {
 <div className="dropdown">
 <button className="btn dropbtn">Select Font</button>
 <div className="dropdown-content">
-{this.state.fonts.map(font => <a style={{fontFamily: font, cursor: "pointer"}} onClick={()=>{this.setState({fontFamily: font})}}>{font}</a>)}
+{this.state.fonts
+  .map(font =>
+    <a style={{
+      fontFamily: font,
+      cursor: "pointer"}}
+      onClick={()=>{
+        this.setState({fontFamily: font})
+      }}>{font}
+      </a>)}
 </div>
 </div>
 
       </div>
       <div style={mainStyle}>
       <h1 className="word"
-      style={wordStyle}>{this.state.enteredWord}</h1>
+      style={wordStyle}>
+      {this.state.enteredWord}
+      </h1>
       </div>
       <div className="inputs text-center">
 <div className="row">
@@ -221,9 +244,15 @@ const cover = {
       <div className="row">
       <div className="col-lg-4 col-sm-4 col-md-4 col-xs-12">
 
-      <button className="btn" onClick={() => {this.setState({displayColorPicker: !this.state.displayColorPicker })}}>Text Color</button>
+      <button className="btn"
+      onClick={() => {
+        this.setState({displayColorPicker: ! this.state.displayColorPicker })
+      }}>
+      Text Color
+      </button>
       { this.state.displayColorPicker ? <div style={ popover }>
-      <div style={ cover } onClick={ () => { this.setState({displayColorPicker: false})} } />
+      <div style={ cover } onClick={ () => {
+        this.setState({displayColorPicker: false})} } />
       <SketchPicker
       color={ this.state.color }
       onChange={this.updateTextColor.bind(this)}
@@ -232,9 +261,16 @@ const cover = {
 
       </div>
       <div className="col-lg-4 col-sm-4 col-md-4 col-xs-12">
-      <button className="btn" onClick={() => {this.setState({displayShadowPicker: !this.state.displayShadowPicker })}}>Shadow Color</button>
+      <button className="btn" onClick={() => {
+        this.setState({
+          displayShadowPicker: ! this.state.displayShadowPicker
+        })}}>
+        Shadow Color</button>
       { this.state.displayShadowPicker ? <div style={ popover }>
-      <div style={ cover } onClick={ () => { this.setState({displayShadowPicker: false})} } />
+      <div style={ cover } onClick={ () => {
+        this.setState({
+          displayShadowPicker: false
+        })}} />
       <SketchPicker
       color={ this.state.shadowColor }
       onChange={this.updateTextShadowColor.bind(this)}
@@ -243,9 +279,14 @@ const cover = {
       </div>
       <div className="col-lg-4 col-sm-4 col-md-4 col-xs-12">
 
-      <button className="btn" onClick={() => {this.setState({displayBackgroundPicker: !this.state.displayBackgroundPicker })}}>Background Color</button>
+      <button className="btn" onClick={() => {
+        this.setState({
+          displayBackgroundPicker: ! this.state.displayBackgroundPicker
+        })}}>Background Color</button>
       { this.state.displayBackgroundPicker ? <div style={ popover }>
-      <div style={ cover } onClick={ () => { this.setState({displayBackgroundPicker: false})} } />
+      <div style={ cover } onClick={ () => { this.setState({
+        displayBackgroundPicker: false
+      })}} />
       <SketchPicker
       color={ this.state.backgroundColor }
       onChange={this.updateBackgroundColor.bind(this)}
@@ -265,7 +306,11 @@ onClick={this.thinFontWeight.bind(this)}>Thin Font Weight</button>
 <button className="btn"
 onClick={this.normalFontWeight.bind(this)}>Reset Font Weight</button>
 
-      <button value={this.state.shadowValues} onClick={this.copyValues.bind(this)} className="btn">Copy Shadow Values to Clipboard</button>
+      <button value={this.state.shadowValues}
+      onClick={this.copyValues.bind(this)}
+      className="btn">
+      Copy Shadow Values to Clipboard
+      </button>
 </div>
 
 </div>
@@ -281,9 +326,13 @@ onClick={this.normalFontWeight.bind(this)}>Reset Font Weight</button>
 
       <div>
       <button className="btn" style={{margin: "2px"}}
-      onClick={()=> {this.setState({fontSize: this.state.fontSize + 1})}}>+</button>
+      onClick={()=> {this.setState({
+        fontSize: this.state.fontSize + 1
+      })}}>+</button>
       <button className="btn" style={{margin: "2px"}}
-      onClick={()=> {this.setState({fontSize: this.state.fontSize - 1})}}>-</button>
+      onClick={()=> {this.setState({
+        fontSize: this.state.fontSize - 1
+      })}}>-</button>
       </div>
 
       </div>
@@ -298,17 +347,30 @@ onClick={this.normalFontWeight.bind(this)}>Reset Font Weight</button>
       />
       <div>
       <button className="btn" style={{margin: "2px"}}
-      onClick={()=> {this.setState({shadowLength: this.state.shadowLength + 1}, () => {
+      onClick={()=> {this.setState({
+        shadowLength: this.state.shadowLength + 1
+      }, () => {
         this.renderShadows()
       })}}>+</button>
       <button className="btn" style={{margin: "2px"}}
-      onClick={()=> {this.setState({shadowLength: this.state.shadowLength - 1}, () => {
+      onClick={()=> {this.setState({
+        shadowLength: this.state.shadowLength - 1
+      }, () => {
         this.renderShadows()
       })}}>-</button>
       </div>
       </div>
 
-<a rel="noopener noreferrer" target= "_blank" href="https://github.com/nseyf/text-shadow-assist"><i style={{color: "#151515", padding: "5px", marginTop: "15px"}} className="fa fa-4x fa-github" aria-hidden="true"></i></a>
+<a
+rel="noopener noreferrer"
+target= "_blank"
+href="https://github.com/nseyf/text-shadow-assist">
+<i style={{
+  color: "#151515",
+  padding: "5px",
+  marginTop: "15px"}}
+  className="fa fa-4x fa-github"
+  aria-hidden="true"></i></a>
       </div>
       </div>
       </div>
